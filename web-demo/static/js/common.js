@@ -4,7 +4,8 @@
     dots: true,
     infinite: true,
     speed: 500,
-    fade: true,
+	fade: true,
+	arrows: false,
     cssEase: 'linear'
 });
 
@@ -50,6 +51,9 @@ $('.btn-inc').click(function(){
     $(this).prev().val(x);        
 })
 
+
+// count date
+
 function makeTimer() {
 	
 		var endTime = new Date("29 April 2020 9:56:00 GMT+01:00");			
@@ -77,3 +81,21 @@ function makeTimer() {
 	}
 
 	setInterval(function() { makeTimer(); }, 1000);
+
+
+// dropdown menu
+
+function toggleDropdown (e) {
+	const _d = $(e.target).closest('.dropdown'),
+	  _m = $('.dropdown-menu', _d);
+	setTimeout(function(){
+	  const shouldOpen = e.type !== 'click' && _d.is(':hover');
+	  _m.toggleClass('show', shouldOpen);
+	  _d.toggleClass('show', shouldOpen);
+	  $('[data-toggle="dropdown"]', _d).attr('aria-expanded', shouldOpen);
+	}, e.type === 'mouseleave' ? 300 : 0);
+  }
+  
+  $('body')
+	.on('mouseenter mouseleave','.dropdown',toggleDropdown)
+	.on('click', '.dropdown-menu a', toggleDropdown);

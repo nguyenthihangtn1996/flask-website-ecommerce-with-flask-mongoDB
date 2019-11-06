@@ -30,8 +30,10 @@ def is_logged_in(f):
 @app.route('/')
 def index():
     slides = mongo.db.slide.find()
+
     product_main = mongo.db.product.find()
     news = mongo.db.news.find()
+
     return render_template('index.html', slides = slides, product_main = product_main, news = news) 
 
 
