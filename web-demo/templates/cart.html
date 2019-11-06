@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+        <h2>Shopping cart</h2>
+        <table border="1">
+                <tr>
+                    <th>Tên</th>
+                    <th>Hình ảnh</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Tổng tiền</th>
+                </tr>
+                {% for cart_item in cart %} 
+                    <tr>
+                        <td>{{ cart_item.name }}</td>
+                        <td><img src="{{ cart_item.image }}" width="80" alt=""></td>
+                        <td><button class="btn-sub">-</button>  <input class="qty_val" type="number" value="{{ cart_item.qty }}"> <button class="btn-inc">+</button> <button class="btn-del">x</button> </td>
+                        <td>{{ cart_item.price }}</td>
+                        <td>{{ cart_item.total_price  }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <p>Tổng tiền: {{ total }}</p>
+            <a href="/remove-cart">remove cart</a>
+        
+            
+            {% if total>0 %}
+                <a href="/checkout">Check out</a>
+            {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block body %}
+    {% include './include/slider.html' %}
+    <div class="shopping-category">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="category_item">
+              <h2><a href="">Women</a></h2>
+              <img src="{{ url_for('static', filename='images/category1.jpg') }}" alt="" srcset="">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="category_item">
+              <h2><a href="">Man</a></h2>
+              <img src="{{ url_for('static', filename='images/category2.jpg') }}" alt="" srcset="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="arrival-section">
+      <div class="container">
+        <div class="title">
+          <h2>New Arrivals</h2>
+          <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections</p>
+        </div>        
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">All products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Clothing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Bags</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Shoes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Accessories</a>
+          </li>
+          
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div class="row">
+                  {% for product in product_main %}
+
+                  <div class="col-md-2">
+                    <div class="item_product">
+                      <div class="img-wrap">
+                        <img src="{{ product.image }}" alt="">
+                        <div class="product_overlay">
+                          <a href="/product-details/{{ product._id }}">Add to cart </a>
+                          <img src="{{ url_for('static' , filename='images/heart.png') }}" alt="">
+                          <img src="{{ url_for('static' , filename='images/thin-expand-arrows.png') }}" alt="">
+                        </div>
+                      </div>
+
+                      <h3><a href="">{{ product.name }}</a></h3>
+                      <p class="price">$ {{'%0.2f'|format(product.price|float)}}</p>
+
+                      <div class="product-stars">
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-muted"></i>
+                        <i class="fa fa-star text-muted"></i>
+                      </div>
+                    </div>  
+                  </div>
+                  
+                  {% endfor %}
+                      
+                      
+              </div>
+          </div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- <div class="container">
+      <div class="row">
+        {% for new in news %}
+
+    <figure class="snip1518">
+        <div class="image"><img src="{{ new.image }}" alt="{{ new.title }}" /></div>
+        
+        <figcaption>
+          <h5>{{ new.title }}</h5>
+          <h3>{{ new.short_des }}</h3>
+          <footer>
+            <div class="date">{{ new.date }}</div>
+            <div class="icons">
+              <div class="views"><i class="far fa-eye"></i> {{ new.view }}</div>
+              <div class="love"><i class="fas fa-heart"></i> {{ new.date.strftime('%d-%m-%y') }}</div>
+            </div>
+          </footer>
+        </figcaption>
+        <a href="#"></a>
+      </figure>
+        {% endfor %}
+        
+ </div>
+    </div> -->
+    <div class="count-date">
+      <div class="container">
+        <h2>DEAL OF THE WEEK</h2>
+        <h3>Oversized denim jacket</h3>
+        <p class="price_group"><span class="price">$129.00</span> <span class="price_sale">$79.00</span></p>
+        <a href="" class="btn-red">$50 off</a>
+        <div class="timer">
+          <div class="days"></div>
+          <div class="hours"></div>
+          <div class="minutes"></div>
+          <div class="seconds"></div>
+        </div>
+        <a href="" class="shop-now">Shop now</a>
+      </div>
+    </div>
+    <div class="history">
+      <div class="container">
+        <h2>OUR HISTORY</h2>
+        <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections        </p> <br>
+        <p>He must have tried it a hundred times, shut his eyes so that he wouldn't have to look at the floundering legs, and only stopped when he began to feel a mild, dull pain there that he had never felt before.</p>
+        <div class="slide_parner">
+          <img src="{{ url_for('static', filename='images/partner1.svg') }}" alt="">
+          <img src="{{ url_for('static', filename='images/partner2.svg') }}" alt="">
+          <img src="{{ url_for('static', filename='images/partner3.svg') }}" alt="">
+          <img src="{{ url_for('static', filename='images/partner4.svg') }}" alt="">
+          <img src="{{ url_for('static', filename='images/partner5.svg') }}" alt="">
+          <img src="{{ url_for('static', filename='images/partner6.svg') }}" alt="">
+          <img src="{{ url_for('static', filename='images/partner1.svg') }}" alt="">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="shipping">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="item">
+              <img src="{{ url_for('static', filename='images/shipping-and-delivery.png') }}" alt="">
+              <div class="text">
+                <h3>Free shipping & return</h3>
+                <p>Free Shipping over $300</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="item">
+              <img src="{{ url_for('static', filename='images/coin.png') }}" alt="">
+              <div class="text">
+                <h3>Money back guarantee</h3>
+                <p>30 Days Money Back Guarantee</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="item">
+              <img src="{{ url_for('static', filename='images/sale.png') }}" alt="">
+              <div class="text">
+                <h3>Best prices</h3>
+                <p>Always the best prices</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="item">
+              <img src="{{ url_for('static', filename='images/support.png') }}" alt="">
+              <div class="text">
+                <h3>020-800-456-747</h3>
+                <p>24/7 Available Support</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
