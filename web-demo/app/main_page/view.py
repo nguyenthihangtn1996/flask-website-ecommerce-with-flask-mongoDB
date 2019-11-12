@@ -10,7 +10,6 @@ import json
 app.config['MONGO_DBNAME'] = 'Hang-web'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/Hang-web'
 
-
 mongo = PyMongo(app)
 
 main_page = Blueprint('main_pages', __name__, url_prefix='/')
@@ -26,7 +25,6 @@ def index():
 
 @app.route('/addToCart/')
 def add_cart():
-
     productId = request.args.get('productId')
     product_cart = mongo.db.product.find_one({ '_id': ObjectId(productId)})
     product_cart = json.loads(json_util.dumps(product_cart))

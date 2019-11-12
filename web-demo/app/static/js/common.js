@@ -99,3 +99,26 @@ function toggleDropdown (e) {
   $('body')
 	.on('mouseenter mouseleave','.dropdown',toggleDropdown)
 	.on('click', '.dropdown-menu a', toggleDropdown);
+
+        
+        $(document).ready(function() {
+		
+    $('.delete_btn').click(function(){
+		$.ajax({
+            data: {
+                id_product: $(this).attr('data')
+            },
+            type: 'POST',
+            url: "/admin/delete/"
+        })
+	})
+	$('.update_btn').click(function(){
+		$.ajax({
+            data: {
+                id_product: $(this).attr('data')
+            },
+            type: 'POST',
+            url: "/admin/update/"
+        })
+	})
+});

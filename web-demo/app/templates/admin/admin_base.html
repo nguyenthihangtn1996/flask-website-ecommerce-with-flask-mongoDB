@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <title>Admin Page</title>
+
+</head>
+<body>
+        <nav>
+                <header> <span><img src="{{ user_login.images }}" alt=""></span> {{ user_login.username }}
+                    
+                </header>
+                <ul>
+                    <li><i class="fas fa-home"></i>  <a href="{{ url_for('.admin_index') }}">Home</a></li>
+                    <li><i class="fas fa-store"></i> <a href="{{ url_for('.admin_product') }}">Product</a></li>
+                    <li><i class="fas fa-newspaper"></i> <a href="{{ url_for('.admin_index') }}"> News</a></li>
+                    <li><i class="fas fa-newspaper"></i> <a href="{{ url_for('.admin_index') }}"> User</a></li>
+                </ul>
+            </nav>
+            <main>
+                <div class="main_body">
+                    {% block body_admin %}
+                    
+                    {% endblock %}
+                    <a class="logout_btn" href="{{ url_for('.logout') }}">Logout</a>
+                </div>
+            </main>
+</body>
+<script src="http://code.jquery.com/jquery-2.0.0.min.js" ></script>
+<script src="{{ url_for('static', filename='js/popper.js') }}" ></script>
+<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<script src="https://kit.fontawesome.com/d937c62bbd.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+</html>

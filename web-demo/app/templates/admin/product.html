@@ -1,0 +1,33 @@
+{% extends "admin/admin_base.html" %}
+{% block body_admin %}
+    <a href="{{ url_for('.add_product') }}">Add product</a>
+    <h1>Product </h1>    
+    <div class="container">
+        <table border="1" class="table_product">
+            <tr>
+                <th>STT</th>
+                <th>Name product</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Sale Price</th>
+                <th>Description</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for item in product_main %}
+            <tr>
+                <td>{{ item._id }}</td>
+                <td>{{ item.name }}</td>
+                <td><img class="" src="../static/images/{{ item.image }}" alt="{{ item.name }}"></td>
+                <td>{{ item.price }} $</td>
+                <td>{{ item.sale_price }} $</td>
+                <td>{{ item.des }}</td>
+                <td><a href="/admin/update?productId={{ item._id }}'" class="" ><i class="fas fa-edit"></i> </a></td>
+                <td><a href=""  class="delete_btn" data="{{ item._id }}"><i class="fas fa-times-circle"></i></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+    </div>
+    
+{% endblock %}
