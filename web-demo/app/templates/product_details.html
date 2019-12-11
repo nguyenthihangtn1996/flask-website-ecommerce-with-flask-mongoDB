@@ -2,11 +2,7 @@
 {% block body %}
   <div class="container">
       <h1>{{ detail_product.name }}</h1>
-      <img src="{{ detail_product.image }}" alt="">
+      <img src="/static/images/{{ detail_product.image }}" alt="">
       <a href="/addToCart?productId={{ detail_product._id }}" class="add-to-cart" >Add to cart</a>
   </div>
-
-<script>
-    
-</script>
 {% endblock %}

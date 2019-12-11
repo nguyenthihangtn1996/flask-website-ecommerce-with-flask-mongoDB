@@ -14,9 +14,13 @@ mongo = PyMongo(app)
 
 main_page = Blueprint('main_pages', __name__, url_prefix='/')
 
-
 @main_page.route("/")
 def index():
+    admin_acc = {"username" : "admin", "password": "admin"}
+    check = mongo.db.admin.find_one(admin_acc)
+    if check == None:
+        create_acc = mongo.db.admin.insert(admin_acc)
+
     slides = mongo.db.slide.find()
 
     product_main = mongo.db.product.find()
@@ -58,6 +62,7 @@ def product_details(id_product):
     detail_product = mongo.db.product.find_one({"_id": ObjectId(id_product)})
     return render_template('product_details.html', detail_product = detail_product) 
 
+
 @app.route('/cart')
 def cart():
     if 'cart' not in session:
@@ -83,6 +88,17 @@ def remove_cart():
     
     return redirect(url_for('cart'))
 
+
+
 @app.route('/checkout')
 def checkout():
     return  'checkout'
+
+@app.route('/category')
+def category():
+    product_main = mongo.db.product.find()
+
+    product_category = mongo.db.category_product.find()
+
+
+    return render_template('category.html', product_main = product_main, product_category = product_category )

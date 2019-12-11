@@ -8,10 +8,11 @@ h1 {
   height: 70px;
   padding: 0 25px;
   line-height: 66px;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 300;
   text-transform: uppercase;
-  background: #fafafa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
 
 nav {
@@ -78,21 +79,330 @@ nav ul li:hover {
 
 main {
   width: calc(100% - 250px);
+  background: -webkit-gradient(linear, left top, right top, from(#25c481), to(#25b7c4));
+  background: linear-gradient(to right, #25c481, #25b7c4);
+}
+
+.table_product {
+  width: 100%;
 }
 
 .table_product img {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
+.table_product tr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+
+.table_product tr th {
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.table_product tr th:nth-child(1) {
+  width: 5%;
+}
+
+.table_product tr th:nth-child(2) {
+  width: 20%;
+}
+
+.table_product tr th:nth-child(3) {
+  width: 15%;
+  margin: auto;
+}
+
+.table_product tr th:nth-child(4) {
+  width: 10%;
+}
+
+.table_product tr th:nth-child(5) {
+  width: 10%;
+}
+
+.table_product tr th:nth-child(6) {
+  width: 30%;
+}
+
+.table_product tr th:nth-child(7) {
+  width: 5%;
+}
+
+.table_product tr th:nth-child(8) {
+  width: 5%;
+}
+
+.table_product tr td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.15);
+}
+
+.table_product tr td i {
+  color: #fff;
+  font-size: 13px;
+}
+
+.table_product tr td:nth-child(1) {
+  width: 5%;
+}
+
+.table_product tr td:nth-child(2) {
+  width: 20%;
+}
+
+.table_product tr td:nth-child(3) {
+  width: 15%;
+}
+
+.table_product tr td:nth-child(4) {
+  width: 10%;
+}
+
+.table_product tr td:nth-child(5) {
+  width: 10%;
+}
+
+.table_product tr td:nth-child(6) {
+  width: 30%;
+}
+
+.table_product tr td:nth-child(7) {
+  width: 5%;
+}
+
+.table_product tr td:nth-child(8) {
+  width: 5%;
+}
+
 .logout_btn {
   position: absolute;
-  top: 18px;
-  right: 15px;
-  color: red;
-  font-weight: 500;
-  text-decoration: underline;
+  top: 0;
+  right: 0;
+  background: black;
+  color: white;
+  height: 68px;
+  width: 68px;
+  font-size: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.logout_btn:hover {
+  text-decoration: none;
+}
+
+/*Checkboxes styles*/
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label {
+  display: block;
+  position: relative;
+  margin-bottom: 20px;
+  font: 14px/20px 'Open Sans', Arial, sans-serif;
+  color: #ddd;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+input[type="checkbox"] + label:last-child {
+  margin-bottom: 0;
+}
+
+input[type="checkbox"] + label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #fff;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.s-hidden {
+  visibility: hidden;
+  padding-right: 10px;
+}
+
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  padding: 5px 35px;
+  text-align: center;
+}
+
+.select .styledSelect {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 10px;
+}
+
+.select .styledSelect::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-color: #fff transparent transparent transparent;
+  position: absolute;
+  top: 9px;
+  right: 6px;
+}
+
+.select .styledSelect.active, .select .styledSelect:active {
+  background-color: #eee;
+}
+
+.select .options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  margin: 0 0;
+  padding: 0 0;
+  list-style: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #000;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.select .options li {
+  padding: 0 6px;
+  margin: 0 0;
+  padding: 0 10px;
+}
+
+.select .options li:hover {
+  background-color: #39f;
+  color: white;
+}
+
+.select-wrap {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.select-wrap .btn-icon {
+  color: white;
+  padding: 9px 30px;
+  font-size: 13px;
+  background: #000;
+}
+
+.select-wrap .btn-icon:hover {
+  text-decoration: none;
+}
+
+.custom-file-upload-hidden {
+  display: none;
+  visibility: hidden;
+  position: absolute;
+  left: -9999px;
+}
+
+.custom-file-upload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: auto;
+  font-size: 16px;
+  margin-top: 30px;
+}
+
+.custom-file-upload label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.custom-file-upload img {
+  height: 40px;
+  width: 40px;
+  margin-left: 30px;
+}
+
+.file-upload-wrapper {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.file-upload-input {
+  width: 350px;
+  color: #000;
+  font-size: 15px;
+  padding: 8px 20px;
+  border: none;
+  background-color: white;
+  float: left;
+}
+
+.file-upload-button {
+  cursor: pointer;
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  border: none;
+  background-color: black;
+}
+
+.file-upload-button:hover {
+  background-color: black;
+}
+
+label {
+  font-size: 13px;
+  color: #fff;
 }
 /*# sourceMappingURL=admin.css.map */

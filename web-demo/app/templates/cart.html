@@ -13,7 +13,7 @@
                 {% for cart_item in cart %} 
                     <tr>
                         <td>{{ cart_item.name }}</td>
-                        <td><img src="{{ cart_item.image }}" width="80" alt=""></td>
+                        <td><img src="/static/images/{{ cart_item.image }}" width="80" alt=""></td>
                         <td><button class="btn-sub">-</button>  <input class="qty_val" type="number" value="{{ cart_item.qty }}"> <button class="btn-inc">+</button> <button class="btn-del">x</button> </td>
                         <td>{{ cart_item.price }}</td>
                         <td>{{ cart_item.total_price  }}</td>

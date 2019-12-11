@@ -5,13 +5,13 @@
         <div class="row">
           <div class="col-md-6">
             <div class="category_item">
-              <h2><a href="">Women</a></h2>
+              <h2><a href="/category">Women</a></h2>
               <img src="{{ url_for('static', filename='images/category1.jpg') }}" alt="" srcset="">
             </div>
           </div>
           <div class="col-md-6">
             <div class="category_item">
-              <h2><a href="">Man</a></h2>
+              <h2><a href="/category">Man</a></h2>
               <img src="{{ url_for('static', filename='images/category2.jpg') }}" alt="" srcset="">
             </div>
           </div>
@@ -50,7 +50,7 @@
                   <div class="col-md-2">
                     <div class="item_product">
                       <div class="img-wrap">
-                        <img src="{{ product.image }}" alt="">
+                        <img src="/static/images/{{ product.image }}" alt="">
                         <div class="product_overlay">
                           <a href="/product-details/{{ product._id }}">Add to cart </a>
                           <img src="{{ url_for('static' , filename='images/heart.png') }}" alt="">
@@ -60,7 +60,6 @@
 
                       <h3><a href="">{{ product.name }}</a></h3>
                       <p class="price">$ {{'%0.2f'|format(product.price|float)}}</p>
-
                       <div class="product-stars">
                         <i class="fa fa-star text-primary"></i>
                         <i class="fa fa-star text-primary"></i>
@@ -72,8 +71,6 @@
                   </div>
                   
                   {% endfor %}
-                      
-                      
               </div>
           </div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>

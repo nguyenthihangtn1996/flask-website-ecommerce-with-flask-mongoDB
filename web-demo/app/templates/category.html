@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block body %}
+  <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+            <h2>Category</h2>
+            <ul class="teachers">
+                {% for item in product_category %}
+                  <li><a href=""> {{ item.name }} </a></li>
+                {% endfor %}
+              </ul>
+            <h2>Price</h2>
+            <input type="range">
+
+            <h2>Brands</h2>
+
+            <h2>Size</h2>
+
+            <h2>Colors</h2>
+        </div>
+        <div class="col-md-9">
+            <h2>Jackets and tops</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+
+                <div class="row">
+                    {% for product in product_main %}
+                  <div class="col-md-3">
+                    <div class="item_product">
+                      <div class="img-wrap">
+                        <img src="/static/images/{{ product.image }}" alt="">
+                        <div class="product_overlay">
+                          <a href="/product-details/{{ product._id }}">Add to cart </a>
+                          <img src="{{ url_for('static' , filename='images/heart.png') }}" alt="">
+                          <img src="{{ url_for('static' , filename='images/thin-expand-arrows.png') }}" alt="">
+                        </div>
+                      </div>
+
+                      <h3><a href="">{{ product.name }}</a></h3>
+                      <p class="price">$ {{'%0.2f'|format(product.price|float)}}</p>
+                      <div class="product-stars">
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-muted"></i>
+                        <i class="fa fa-star text-muted"></i>
+                      </div>
+                    </div>  
+                  </div>
+                  
+                  {% endfor %}
+                </div>
+        </div>
+      </div>
+  </div>
+{% endblock %}

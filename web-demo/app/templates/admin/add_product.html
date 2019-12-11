@@ -1,14 +1,37 @@
 {% extends "admin/admin_base.html" %}
 {% block body_admin %}
+
     <h1>Add product</h1>    
     <div class="container">
             <form action="{{ url_for('.add') }}" method="post" enctype="multipart/form-data">
-                <input type="text" placeholder="Name product" name="name">
-                <input type="file" name="upload_image" >
-                <input type="number" placeholder="Sale" id="" name="price">
-                <input type="number" placeholder="Sale price" id="" name="sale_price">
-                <textarea  placeholder="Description" name="des"></textarea>
-                <input type="submit" name="" id="">
+                <div class="form-group">
+                    <label>Name product</label>
+                    <input type="text" class="form-control" name="name">
+                  </div>
+
+                <div class="custom-file-upload">
+                  <input type="file" name="upload_image" multiple >
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="number" class="form-control" name="price">
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Sale product</label>
+                            <input type="number" class="form-control" name="sale_price">
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="des" id="des_product" rows="10" cols="80" ></textarea>
+                </div>
+                <input type="submit">
 
             </form>
     </div>

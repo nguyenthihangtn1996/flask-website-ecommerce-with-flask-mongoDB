@@ -18,7 +18,9 @@ def allowed_file(filename):
 
 
 admin_page = Blueprint('admin_pages', __name__, url_prefix='/admin')
+
 app.config['MONGO_DBNAME'] = 'Hang-web'
+
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/Hang-web'
 
 mongo = PyMongo(app)
@@ -41,6 +43,11 @@ def is_logged_in(f):
 
 @admin_page.route("/")
 def admin_index():
+    admin_acc = {"username" : "admin", "password": "admin"}
+    check = mongo.db.admin.find_one(admin_acc)
+    if check == None:
+        create_acc = mongo.db.admin.insert(admin_acc)
+
     if 'username' in session:
         username = session['username']
 
@@ -101,26 +108,38 @@ def add():
         if 'upload_image' in request.files:
             file_image = request.files['upload_image']
             mongo.save_file(file_image.filename, file_image)
-    
-        
-        add_item = mongo.db.product.insert_one({'name': request.form["name"], 'price': request.form["price"], 'category': 'quan' , 'sale_price' : request.form["sale_price"], 'image': file_image.filename, 'des': request.form["des"] })
-        return redirect(url_for('.add_product'))
+    add_item = mongo.db.product.insert_one({'name': request.form["name"], 'price': request.form["price"], 'category': 'quan' , 'sale_price' : request.form["sale_price"], 'image': file_image.filename, 'des': request.form["des"] })
+    return redirect(url_for('.add_product'))
 
-@admin_page.route('/update/<string:id_product>')
+@admin_page.route('/update/<string:id_product>', methods=['GET'])
 def update_page(id_product):
-    detail_product = mongo.db.product.find_one({"_id": ObjectId(id_product)})
-    # id_product = request.form['id_product']
+    if 'username' in session:
+        username = session['username']
 
-    # update = mongo.db.product.update({"_id": ObjectId(id_product) },{"$set": {"name": "Quan", "price": 22 }})
-    return render_template('admin/update.html', detail_product = detail_product)
+        user_login = mongo.db.admin.find_one({"username": username})
+
+
+    detail_product = mongo.db.product.find_one({"_id": ObjectId(id_product)})
+
+    return render_template('admin/update.html', detail_product = detail_product , user_login = user_login)
+
+@admin_page.route('/update/', methods=['POST'])
+def update():
+    if 'username' in session:
+        username = session['username']
+        user_login = mongo.db.admin.find_one({"username": username})
+
+    id_product = request.form['id_product']
+
+    update = mongo.db.product.update({"_id": ObjectId(id_product) },{"$set": {"name": "Ao", "price": 34 }})
+
+    return redirect(url_for('.admin_product'))
 
 @admin_page.route('/delete/' , methods=['POST'])
 def delete():
     if 'username' in session:
         username = session['username']
-
         product_main = mongo.db.product.find()
-
         user_login = mongo.db.admin.find_one({"username": username})
 
     id_product = request.form['id_product']

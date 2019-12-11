@@ -1,12 +1,39 @@
 
-<form action="">
-    <div class="form-group">
-        <input type="text" value="{{ detail_product.name }}">
-     </div>
-    <div class="form-group">
-        <input type="text" value="{{ detail_product.price }}">
-     </div>
-     <div class="form-group">
-        <input type="text" value="{{ detail_product.sale_price }}">
-     </div>
-    </form>
+{% extends "admin/admin_base.html" %}
+{% block body_admin %}
+<h1>Update product</h1>
+<div class="container">
+      <form action="{{ url_for('.update') }}" method="POST" >
+          <div class="form-group">
+              <label>Name product</label>
+              <input type="text" class="form-control" name="name" value="{{ detail_product.name }}">
+            </div>
+
+          <div class="custom-file-upload">
+            <input type="file" name="upload_image" multiple  value="../../static/images/{{ detail_product.image }}">
+            <img src="../../static/images/{{ detail_product.image }}" alt="{{ detail_product.name }}">
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                      <div class="form-group">
+                              <label>Price</label>
+                              <input type="number" class="form-control" name="price" value="{{ detail_product.price }}">
+                      </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Sale product</label>
+                      <input type="number" class="form-control" name="sale_price" value="{{ detail_product.sale_price }}">
+                  </div>
+              </div>
+          </div>
+          
+            <div class="form-group">
+              <label>Description</label>
+              <textarea name="des" id="des_product" rows="10" cols="80" >{{ detail_product.des }}</textarea>
+          </div>
+          <input type="submit" class="update_btn" value="Update" data="{{ detail_product._id }}">
+
+      </form>
+</div>
+{% endblock %}

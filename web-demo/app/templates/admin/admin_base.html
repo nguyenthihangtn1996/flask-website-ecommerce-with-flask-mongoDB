@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+   
     <title>Admin Page</title>
 
 </head>
@@ -28,7 +29,7 @@
                     {% block body_admin %}
                     
                     {% endblock %}
-                    <a class="logout_btn" href="{{ url_for('.logout') }}">Logout</a>
+                    <a class="logout_btn" href="{{ url_for('.logout') }}"><i class="fas fa-power-off"></i></a>
                 </div>
             </main>
 </body>
@@ -38,4 +39,9 @@
 <script src="https://kit.fontawesome.com/d937c62bbd.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
 <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+
+<script src="../../static/js/ckeditor/ckeditor.js"></script>
+<script>
+        CKEDITOR.replace( 'des_product' );
+    </script>
 </html>

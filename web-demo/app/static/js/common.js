@@ -112,13 +112,156 @@ function toggleDropdown (e) {
             url: "/admin/delete/"
         })
 	})
-	$('.update_btn').click(function(){
-		$.ajax({
-            data: {
-                id_product: $(this).attr('data')
-            },
-            type: 'POST',
-            url: "/admin/update/"
-        })
-	})
 });
+
+//style for select option
+$('select').each(function () {
+
+    var $this = $(this),
+        numberOfOptions = $(this).children('option').length;
+
+    $this.addClass('s-hidden');
+
+    $this.wrap('<div class="select"></div>');
+
+    $this.after('<div class="styledSelect"></div>');
+    var $styledSelect = $this.next('div.styledSelect');
+
+    $styledSelect.text($this.children('option').eq(0).text());
+    var $list = $('<ul />', {
+        'class': 'options'
+    }).insertAfter($styledSelect);
+    for (var i = 0; i < numberOfOptions; i++) {
+        $('<li />', {
+            text: $this.children('option').eq(i).text(),
+            rel: $this.children('option').eq(i).val()
+        }).appendTo($list);
+    }
+
+    var $listItems = $list.children('li');
+
+    $styledSelect.click(function (e) {
+        e.stopPropagation();
+        $('div.styledSelect.active').each(function () {
+            $(this).removeClass('active').next('ul.options').hide();
+        });
+        $(this).toggleClass('active').next('ul.options').toggle();
+    });
+    $listItems.click(function (e) {
+        e.stopPropagation();
+        $styledSelect.text($(this).text()).removeClass('active');
+        $this.val($(this).attr('rel'));
+        $list.hide();
+    });
+
+    $(document).click(function () {
+        $styledSelect.removeClass('active');
+        $list.hide();
+    });
+
+});
+
+//style for input file
+;(function($) {
+
+	var multipleSupport = typeof $('<input/>')[0].multiple !== 'undefined',
+		isIE = /msie/i.test( navigator.userAgent );
+
+	$.fn.customFile = function() {
+
+	  return this.each(function() {
+
+		var $file = $(this).addClass('custom-file-upload-hidden'), 
+			$wrap = $('<div class="file-upload-wrapper">'),
+			$input = $('<input type="text" class="file-upload-input" />'),
+			$button = $('<button type="button" class="file-upload-button">Select a File</button>'),
+			$label = $('<label class="file-upload-button" for="'+ $file[0].id +'">Select a File</label>');
+
+		$file.css({
+		  position: 'absolute',
+		  left: '-9999px'
+		});
+
+		$wrap.insertAfter( $file )
+		  .append( $file, $input, ( isIE ? $label : $button ) );
+
+	
+		$file.attr('tabIndex', -1);
+		$button.attr('tabIndex', -1);
+
+		$button.click(function () {
+		  $file.focus().click(); 
+		});
+
+		$file.change(function() {
+
+		  var files = [], fileArr, filename;
+
+		  if ( multipleSupport ) {
+			fileArr = $file[0].files;
+			for ( var i = 0, len = fileArr.length; i < len; i++ ) {
+			  files.push( fileArr[i].name );
+			}
+			filename = files.join(', ');
+		  } else {
+			filename = $file.val().split('\\').pop();
+		  }
+
+		  $input.val( filename )
+			.attr('title', filename)
+			.focus(); 
+
+		});
+
+		$input.on({
+		  blur: function() { $file.trigger('blur'); },
+		  keydown: function( e ) {
+			if ( e.which === 13 ) { 
+			  if ( !isIE ) { $file.trigger('click'); }
+			} else if ( e.which === 8 || e.which === 46 ) { 
+			  $file.replaceWith( $file = $file.clone( true ) );
+			  $file.trigger('change');
+			  $input.val('');
+			} else if ( e.which === 9 ){ 
+			  return;
+			} else { 
+			  return false;
+			}
+		  }
+		});
+
+	  });
+
+	};
+
+	if ( !multipleSupport ) {
+	  $( document ).on('change', 'input.customfile', function() {
+
+		var $this = $(this),
+			uniqId = 'customfile_'+ (new Date()).getTime(),
+			$wrap = $this.parent(),
+
+			$inputs = $wrap.siblings().find('.file-upload-input')
+			  .filter(function(){ return !this.value }),
+
+			$file = $('<input type="file" id="'+ uniqId +'" name="'+ $this.attr('name') +'"/>');
+
+		setTimeout(function() {
+		  if ( $this.val() ) {
+			if ( !$inputs.length ) {
+			  $wrap.after( $file );
+			  $file.customFile();
+			}
+		  } else {
+			$inputs.parent().remove();
+			$wrap.appendTo( $wrap.parent() );
+			$wrap.find('input').focus();
+		  }
+		}, 1);
+
+	  });
+	}
+
+}(jQuery));
+
+$('input[type=file]').customFile();
