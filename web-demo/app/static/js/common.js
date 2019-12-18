@@ -100,10 +100,13 @@ function toggleDropdown (e) {
 	.on('mouseenter mouseleave','.dropdown',toggleDropdown)
 	.on('click', '.dropdown-menu a', toggleDropdown);
 
-        
         $(document).ready(function() {
 		
-    $('.delete_btn').click(function(){
+    
+
+});
+function send_data_ajax(c_btn){
+	$(c_btn).click(function(){
 		$.ajax({
             data: {
                 id_product: $(this).attr('data')
@@ -112,8 +115,8 @@ function toggleDropdown (e) {
             url: "/admin/delete/"
         })
 	})
-});
-
+}
+send_data_ajax('.delete_btn');
 //style for select option
 $('select').each(function () {
 
@@ -173,7 +176,7 @@ $('select').each(function () {
 
 		var $file = $(this).addClass('custom-file-upload-hidden'), 
 			$wrap = $('<div class="file-upload-wrapper">'),
-			$input = $('<input type="text" class="file-upload-input" />'),
+			$input = $('<input type="text" class="file-upload-input" name="text_image" />'),
 			$button = $('<button type="button" class="file-upload-button">Select a File</button>'),
 			$label = $('<label class="file-upload-button" for="'+ $file[0].id +'">Select a File</label>');
 
@@ -265,3 +268,18 @@ $('select').each(function () {
 }(jQuery));
 
 $('input[type=file]').customFile();
+
+
+//check valid type image
+
+function checkextension() {
+	var file = document.querySelector(".upload_image");
+	if ( /\.(jpe?g|png|gif|svg|jpg)$/i.test(file.files[0].name) === false ) { 
+		$("#form_product").submit(function(e){
+			e.preventDefault();
+			return false;
+		});
+		$('.not-image').show();
+
+	}
+  }

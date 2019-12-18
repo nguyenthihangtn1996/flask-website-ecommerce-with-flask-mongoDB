@@ -1,0 +1,17 @@
+{
+  "name": "static",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "email-validator": "^2.0.4",
+    "jquery-validation": "^1.19.1",
+    "watchify": "^3.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

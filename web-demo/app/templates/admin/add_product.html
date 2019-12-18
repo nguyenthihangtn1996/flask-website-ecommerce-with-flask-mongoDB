@@ -3,20 +3,21 @@
 
     <h1>Add product</h1>    
     <div class="container">
-            <form action="{{ url_for('.add') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url_for('.add') }}" method="post" enctype="multipart/form-data" id="form_product">
                 <div class="form-group">
                     <label>Name product</label>
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" name="name" required>
                   </div>
 
-                <div class="custom-file-upload">
-                  <input type="file" name="upload_image" multiple >
-                </div>
+                  <div class="custom-file-upload">
+                      <input type="file" class="upload_image" name="upload_image">
+                    </div>
+                    <label for="" class="error not-image d-none">Not the image</label>
                 <div class="row">
                     <div class="col-md-6">
                             <div class="form-group">
                                     <label>Price</label>
-                                    <input type="number" class="form-control" name="price">
+                                    <input type="number" class="form-control" name="price" required>
                             </div>
                     </div>
                     <div class="col-md-6">
@@ -29,9 +30,9 @@
                 
                   <div class="form-group">
                     <label>Description</label>
-                    <textarea name="des" id="des_product" rows="10" cols="80" ></textarea>
+                    <textarea name="des" id="des_product" rows="10" cols="80" required ></textarea>
                 </div>
-                <input type="submit">
+                <input type="submit" onclick="checkextension()">
 
             </form>
     </div>

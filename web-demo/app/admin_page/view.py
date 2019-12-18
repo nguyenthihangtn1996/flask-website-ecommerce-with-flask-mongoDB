@@ -17,6 +17,8 @@ def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+
+
 admin_page = Blueprint('admin_pages', __name__, url_prefix='/admin')
 
 app.config['MONGO_DBNAME'] = 'Hang-web'
@@ -62,7 +64,7 @@ def login():
         if request.method == 'POST':
             user_login = mongo.db.admin.find_one({"username": request.form["username"], "password": request.form["password"] })
             if user_login is None:
-                error = "Khong dung mat khau hoac tai khoan"
+                error = "Incorrect username or password"
             else:
                 session['username'] = request.form['username']
                 return redirect(url_for('.admin_index'))
@@ -111,7 +113,7 @@ def add():
     add_item = mongo.db.product.insert_one({'name': request.form["name"], 'price': request.form["price"], 'category': 'quan' , 'sale_price' : request.form["sale_price"], 'image': file_image.filename, 'des': request.form["des"] })
     return redirect(url_for('.add_product'))
 
-@admin_page.route('/update/<string:id_product>', methods=['GET'])
+@admin_page.route('/update/<id_product>', methods=['GET'])
 def update_page(id_product):
     if 'username' in session:
         username = session['username']
@@ -129,9 +131,27 @@ def update():
         username = session['username']
         user_login = mongo.db.admin.find_one({"username": username})
 
-    id_product = request.form['id_product']
 
-    update = mongo.db.product.update({"_id": ObjectId(id_product) },{"$set": {"name": "Ao", "price": 34 }})
+    
+
+    id_product = request.form['id_product']
+    name = request.form['name']
+    price = request.form['price']
+    des = request.form['des']
+    sale_price = request.form['sale_price']
+    image = request.files['upload_image'].filename
+
+    if image == "":
+        update = mongo.db.product.update({"_id": ObjectId(id_product) },{"$set": {"name": name, "price": price, "des": des, "sale_price": sale_price  }})
+    
+    else:
+        if 'upload_image' in request.files:
+            file_image = request.files['upload_image']
+            mongo.save_file(file_image.filename, file_image)
+            image = file_image.filename
+        update = mongo.db.product.update({"_id": ObjectId(id_product) },{"$set": {"name": name, "price": price, "des": des, "sale_price": sale_price, "image": image  }})
+
+    
 
     return redirect(url_for('.admin_product'))
 
